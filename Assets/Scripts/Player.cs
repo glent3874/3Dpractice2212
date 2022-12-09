@@ -9,7 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] Transform cameraTransform = null;
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float mouseSpeed = 5f;
+    [SerializeField] LayerMask interactableMask;
+    [SerializeField] Transform interactUI;
 
+    RaycastHit aimedThing;
+    bool aimSomething;
     #endregion
 
     #region 事件
@@ -21,6 +25,23 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Move();
+        Interact();
+    }
+
+    /// <summary>
+    /// 不能lag的物理系統
+    /// </summary>
+    private void FixedUpdate()
+    {
+        InteractDetect();
+    }
+
+    /// <summary>
+    /// UI
+    /// </summary>
+    private void LateUpdate()
+    {
+        InteractUI();
     }
     #endregion
 
@@ -43,6 +64,31 @@ public class Player : MonoBehaviour
         this.transform.Rotate(0f, mouseX * mouseSpeed, 0f);
         //垂直軸旋轉攝影機
         cameraTransform.Rotate(-mouseY * mouseSpeed, 0f, 0f);
+    }
+
+    /// <summary>
+    /// 互動偵測
+    /// </summary>
+    private void InteractDetect()
+    {
+        aimSomething = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out aimedThing, 2f, interactableMask);
+    }
+
+    /// <summary>
+    /// 互動UI的開關
+    /// </summary>
+    private void InteractUI()
+    {
+        if (aimSomething) interactUI.localScale = Vector3.one;
+        else interactUI.localScale = Vector3.zero;
+    }
+
+    private void Interact()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && aimSomething)
+        {
+            aimedThing.collider.transform.root.GetComponent<Item>().interact();
+        }
     }
     #endregion
 }
