@@ -9,11 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField] Transform cameraTransform = null;
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float mouseSpeed = 5f;
+    [SerializeField] float jumpPower = 8f;
     [SerializeField] LayerMask interactableMask;
     [SerializeField] Transform interactUI;
 
     RaycastHit aimedThing;
     bool aimSomething;
+    bool onGround;
     #endregion
 
     #region 事件
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         InteractDetect();
+        JumpDetect();
     }
 
     /// <summary>
@@ -46,6 +49,9 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 方法
+    /// <summary>
+    /// 移動
+    /// </summary>
     private void Move()
     {
         //移動
@@ -57,6 +63,12 @@ public class Player : MonoBehaviour
         Vector3 轉換座標 = this.transform.TransformVector(move);
         rb.velocity = 轉換座標;
 
+        //跳躍
+        if(Input.GetKeyDown(KeyCode.Space) && onGround)
+        {
+            rb.velocity = Vector3.up * jumpPower;
+        }
+
         //視角
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
@@ -64,6 +76,11 @@ public class Player : MonoBehaviour
         this.transform.Rotate(0f, mouseX * mouseSpeed, 0f);
         //垂直軸旋轉攝影機
         cameraTransform.Rotate(-mouseY * mouseSpeed, 0f, 0f);
+    }
+
+    private void JumpDetect()
+    {
+        onGround = Physics.Raycast(this.transform.position, Vector3.down, 0.9f);
     }
 
     /// <summary>
@@ -83,6 +100,9 @@ public class Player : MonoBehaviour
         else interactUI.localScale = Vector3.zero;
     }
 
+    /// <summary>
+    /// 互動
+    /// </summary>
     private void Interact()
     {
         if(Input.GetKeyDown(KeyCode.E) && aimSomething)
