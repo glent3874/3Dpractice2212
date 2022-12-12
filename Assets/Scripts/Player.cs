@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance = null;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     #region 欄位
     [SerializeField] Rigidbody rb = null;
     [SerializeField] Transform cameraTransform = null;
@@ -105,7 +111,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E) && aimSomething)
+        if(Input.GetKeyDown(KeyCode.E) && aimSomething && !對話系統.instance.isPlay)
         {
             aimedThing.collider.transform.root.GetComponent<Item>().interact();
         }

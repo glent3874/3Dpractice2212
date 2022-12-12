@@ -12,6 +12,7 @@ public class NpcData : ScriptableObject
 public struct 話
 {
     public string 講者;
-    public bool 左邊;
+    //public bool 左邊;
+    [TextArea(2,3)]
     public string 內容;
 }
