@@ -12,16 +12,22 @@ public class Player : MonoBehaviour
 
     #region 欄位
     [SerializeField] Rigidbody rb = null;
+    [SerializeField] Transform cameraFollow = null;
     [SerializeField] Transform cameraTransform = null;
     [SerializeField] float moveSpeed = 20f;
     [SerializeField] float mouseSpeed = 5f;
     [SerializeField] float jumpPower = 8f;
     [SerializeField] LayerMask interactableMask;
     [SerializeField] Transform interactUI;
+    [SerializeField] Animator kyleAnimator = null;
 
+    float ws = 0f;
+    float ad = 0f;
     RaycastHit aimedThing;
     bool aimSomething;
     bool onGround;
+    //從攝影機到玩家的距離
+    float cameraToPlayerDistance;
     #endregion
 
     #region 事件
@@ -32,6 +38,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        KyleAnimate();
         Move();
         Interact();
     }
@@ -40,7 +47,7 @@ public class Player : MonoBehaviour
     /// 不能lag的物理系統
     /// </summary>
     private void FixedUpdate()
-    {
+    { 
         InteractDetect();
         JumpDetect();
     }
@@ -61,8 +68,8 @@ public class Player : MonoBehaviour
     private void Move()
     {
         //移動
-        float ws = Input.GetAxis("Vertical");
-        float ad = Input.GetAxis("Horizontal");
+        ws = Mathf.Lerp(ws, Input.GetAxisRaw("Vertical"), Time.deltaTime * 10f);
+        ad = Mathf.Lerp(ad, Input.GetAxisRaw("Horizontal"), Time.deltaTime * 10f);
         Vector3 move = new Vector3(ad * moveSpeed, rb.velocity.y, ws * moveSpeed);
 
         //從世界座標轉換成此物件的座標
@@ -80,10 +87,13 @@ public class Player : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
         //水平軸旋轉此物件
         this.transform.Rotate(0f, mouseX * mouseSpeed, 0f);
-        //垂直軸旋轉攝影機
-        cameraTransform.Rotate(-mouseY * mouseSpeed, 0f, 0f);
+        //垂直軸旋轉垂直旋轉軸
+        cameraFollow.Rotate(-mouseY * mouseSpeed, 0f, 0f);
     }
 
+    /// <summary>
+    /// 跳躍偵測
+    /// </summary>
     private void JumpDetect()
     {
         onGround = Physics.Raycast(this.transform.position, Vector3.down, 0.9f);
@@ -94,7 +104,10 @@ public class Player : MonoBehaviour
     /// </summary>
     private void InteractDetect()
     {
-        aimSomething = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out aimedThing, 2f, interactableMask);
+        //攝影機到玩家的距離
+        cameraToPlayerDistance = Vector3.Distance(cameraTransform.position, cameraFollow.position);
+        //從攝影機射出偵測到物件
+        aimSomething = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out aimedThing, cameraToPlayerDistance + 2f, interactableMask);
     }
 
     /// <summary>
@@ -115,6 +128,12 @@ public class Player : MonoBehaviour
         {
             aimedThing.collider.transform.root.GetComponent<Item>().interact();
         }
+    }
+
+    private void KyleAnimate()
+    {
+        kyleAnimator.SetFloat("WS", ws);
+        kyleAnimator.SetFloat("AD", ad);
     }
     #endregion
 }
