@@ -358,7 +358,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28846
+  m_Name: pb_Mesh49824
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4349,15 +4349,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381302131}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.28, y: 2.097, z: -10.06}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -7.05, y: 2.097, z: -1.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 422000250}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &381302137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5598,7 +5598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112dee11b9a26a9499e73cc028372432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 394353366}
+  door: {fileID: 2019202189}
   "\u63CF\u8FF0\u6587\u672C": {fileID: 11400000, guid: 3ec990f3c74d2ea4f8fa43eec1ac6488, type: 2}
 --- !u!54 &518956802
 Rigidbody:
@@ -20034,7 +20034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112dee11b9a26a9499e73cc028372432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 2019202189}
+  door: {fileID: 394353366}
   "\u63CF\u8FF0\u6587\u672C": {fileID: 11400000, guid: d92a6f9169086784b884b0dc5b40e5b4, type: 2}
 --- !u!54 &1394148324
 Rigidbody:
@@ -24940,7 +24940,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28448
+  m_Name: pb_Mesh49424
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
