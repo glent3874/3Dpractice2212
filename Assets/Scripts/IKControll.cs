@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 控制人物視線
+/// </summary>
 public class IKControll : MonoBehaviour
 {
-    [SerializeField] Animator kyleAnimator = null;
-    public Vector3 lookAt = Vector3.zero;
+    #region 欄位
+    [SerializeField] Animator kyleAnimator = null;  //人物動畫控制器
+    public Vector3 lookAt = Vector3.zero;           //看向的位置
+    #endregion
 
-    //允許寫入IK數據的窗口期
+    #region 方法
+    /// <summary>
+    /// 寫入IK數據
+    /// </summary>
+    /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
-        kyleAnimator.SetLookAtPosition(lookAt);
-        kyleAnimator.SetLookAtWeight(1f);
+        kyleAnimator.SetLookAtPosition(lookAt); //看向的位置
+        kyleAnimator.SetLookAtWeight(1f);       //權重
     }
+    #endregion
 }

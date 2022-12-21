@@ -2,28 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 玩家
+/// </summary>
 public class Player : MonoBehaviour
 {
+    #region 單例模式
     public static Player instance = null;
     private void Awake()
     {
         instance = this;
     }
+    #endregion
 
     #region 欄位
-    [SerializeField] Rigidbody rb = null;
-    [SerializeField] Transform cameraFollow = null;
-    [SerializeField] Transform cameraTransform = null;
-    [SerializeField] float moveSpeed = 1.5f;
-    [SerializeField] float runSpeed = 5f; 
-    [SerializeField] float mouseSpeed = 5f;
-    [SerializeField] float jumpPower = 8f;
-    [SerializeField] LayerMask interactableMask;
-    [SerializeField] Transform interactUI;
-    [SerializeField] LayerMask seenableMask;
-    [SerializeField] IKControll ikControl = null;
-    [SerializeField] Animator kyleAnimator = null;
-    [SerializeField] Transform 水平旋轉軸 = null;
+    [SerializeField] Rigidbody rb = null;                       //物理系統
+    [SerializeField] Transform cameraFollow = null;             //攝影機跟隨的目標(垂直旋轉軸)
+    [SerializeField] Transform cameraTransform = null;          //攝影機的座標
+    [SerializeField] float moveSpeed = 1.5f;                    //移動速度
+    [SerializeField] float runSpeed = 5f;                       //跑步速度
+    [SerializeField] float mouseSpeed = 5f;                     //鏡頭靈敏度
+    [SerializeField] float jumpPower = 8f;                      //跳躍力
+    [SerializeField] LayerMask interactableMask;                //可互動的圖層
+    [SerializeField] Transform interactUI;                      //互動UI
+    [SerializeField] LayerMask seenableMask;                    //視線可跟隨的圖層(雷射來自攝影機)
+    [SerializeField] IKControll ikControl = null;               //IK控制
+    [SerializeField] Animator kyleAnimator = null;              //角色動畫控制器
+    [SerializeField] Transform 水平旋轉軸 = null;                //角色水平旋轉的軸心
 
     float ws = 0f;
     float ad = 0f;
@@ -31,13 +36,15 @@ public class Player : MonoBehaviour
     float mouseX = 0f;
     float mouseY = 0f;
     float mouseYTotal = 0f;
-    RaycastHit aimedThing;
-    bool aimSomething;
-    //視線看到的東西
-    RaycastHit thingInSight;
-    bool sight;
-    //從攝影機到玩家的距離
-    float cameraToPlayerDistance;
+    RaycastHit aimedThing;                                      //視線瞄準的可互動物件
+    bool aimSomething;                                          //是否有瞄準到可互動物件
+    RaycastHit thingInSight;                                    //視線瞄準的物件
+    bool sight;                                                 //是否有看到物件
+    float cameraToPlayerDistance;                               //從攝影機到玩家的距離
+
+    /// <summary>
+    /// 同時設定角色跳躍動畫
+    /// </summary>
     bool onGround
     {
         get { return _onground; }
@@ -53,14 +60,15 @@ public class Player : MonoBehaviour
     #region 事件
     private void Start()
     {
+        //鎖定滑鼠
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        KyleAnimate();
-        Move();
-        Interact();
+        KyleAnimate();                      //動畫系統
+        Move();                             //移動
+        Interact();                         //互動
     }
 
     /// <summary>
@@ -68,16 +76,16 @@ public class Player : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     { 
-        InteractDetect();
-        JumpDetect();
+        InteractDetect();               //互動偵測
+        JumpDetect();                   //跳躍偵測
     }
 
     /// <summary>
-    /// UI
+    /// 最後運行的更新
     /// </summary>
     private void LateUpdate()
     {
-        InteractUI();
+        InteractUI();                   //互動UI
     }
     #endregion
 

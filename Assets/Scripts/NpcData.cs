@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 新增創建文本選項
+/// 建立文本列表
+/// </summary>
 [CreateAssetMenu(fileName = "新文本", menuName = "建立新文本")]
 public class NpcData : ScriptableObject
 {
@@ -12,7 +16,6 @@ public class NpcData : ScriptableObject
 public struct 話
 {
     public string 講者;
-    //public bool 左邊;
     [TextArea(2,3)]
     public string 內容;
 }
