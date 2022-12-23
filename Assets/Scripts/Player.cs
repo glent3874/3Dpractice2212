@@ -96,12 +96,12 @@ public class Player : MonoBehaviour
     private void Move()
     {
         //移動
-        ws = Mathf.Lerp(ws, Input.GetAxisRaw("Vertical"), Time.deltaTime * 10f);
-        ad = Mathf.Lerp(ad, Input.GetAxisRaw("Horizontal"), Time.deltaTime * 10f);
-        Vector3 move = new Vector3(ad * moveSpeed, rb.velocity.y, ws * moveSpeed);
-        move.x = ad * Mathf.Lerp(moveSpeed, runSpeed, speed);
+        ws = Mathf.Lerp(ws, Input.GetAxisRaw("Vertical"), Time.deltaTime * 10f);        //取得垂直(WS)輸入值
+        ad = Mathf.Lerp(ad, Input.GetAxisRaw("Horizontal"), Time.deltaTime * 10f);      //取得水平(AD)輸入值
+        Vector3 move;
+        move.x = ad * Mathf.Lerp(moveSpeed, runSpeed, speed);                           //在走路與跑步速度間使用漸進值
         move.y = rb.velocity.y;
-        move.z = ws * Mathf.Lerp(moveSpeed, runSpeed, speed);
+        move.z = ws * Mathf.Lerp(moveSpeed, runSpeed, speed);                           //在走路與跑步速度間使用漸進值
 
         //跑步
         if (Input.GetKey(KeyCode.LeftShift))
