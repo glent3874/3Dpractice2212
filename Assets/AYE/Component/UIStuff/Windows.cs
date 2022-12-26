@@ -5,20 +5,28 @@ using UnityEngine.UI;
 
 public abstract class Windows<T> : SingletonMonoBehaviour<T> where T : class
 {
-    [SerializeField] CanvasGroup mainUI = null;
+    [SerializeField] CanvasGroup canvasGroup = null;
     /// <summary>淡入淡出速度</summary>
-    [HideInInspector] public float openSpeed = 5f;
+    [HideInInspector] public float openSpeed = 10f;
     private void Reset()
     {
-        mainUI = this.gameObject.GetComponent<CanvasGroup>();
+        canvasGroup = this.gameObject.GetComponent<CanvasGroup>();
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
     string ogName = "";
     virtual protected void Start()
     {
         ogName = this.gameObject.name;
         Close();
-        mainUI.alpha = 0f;
-        mainUI.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = false;
     }
     /// <summary>啟動介面</summary>
     virtual public void Open()
@@ -32,7 +40,7 @@ public abstract class Windows<T> : SingletonMonoBehaviour<T> where T : class
     virtual public void Close()
     {
         targetAlpha = 0f;
-        mainUI.blocksRaycasts = false;
+        canvasGroup.blocksRaycasts = false;
 #if UNITY_EDITOR
         this.gameObject.name = ogName;
 #endif
@@ -41,14 +49,14 @@ public abstract class Windows<T> : SingletonMonoBehaviour<T> where T : class
     public bool isOpen = false;
     virtual protected void Update()
     {
-        mainUI.alpha = Mathf.Lerp(mainUI.alpha, targetAlpha, Time.deltaTime * openSpeed);
-        if (mainUI.alpha > 0.9f && isOpen == false)
+        canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.unscaledDeltaTime * openSpeed);
+        if (canvasGroup.alpha > 0.9f && isOpen == false)
         {
             isOpen = true;
-            mainUI.blocksRaycasts = true;
+            canvasGroup.blocksRaycasts = true;
             OnOpen();
         }
-        if (mainUI.alpha < 0.1f && isOpen == true)
+        if (canvasGroup.alpha < 0.1f && isOpen == true)
         {
             isOpen = false;
             OnClose();
@@ -58,4 +66,15 @@ public abstract class Windows<T> : SingletonMonoBehaviour<T> where T : class
     virtual public void OnOpen() { }
     /// <summary>充分完成關閉介面</summary>
     virtual public void OnClose() { }
+    /// <summary>透明度</summary>
+    public float alpha
+    {
+        get
+        {
+            if (canvasGroup != null)
+                return canvasGroup.alpha;
+            else
+                return 0f;
+        }
+    }
 }

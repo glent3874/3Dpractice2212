@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask seenableMask;                    //視線可跟隨的圖層(雷射來自攝影機)
     [SerializeField] IKControll ikControl = null;               //IK控制
     [SerializeField] Animator kyleAnimator = null;              //角色動畫控制器
-    [SerializeField] Transform 水平旋轉軸 = null;                //角色水平旋轉的軸心
+    [SerializeField] public Transform 水平旋轉軸 = null;                //角色水平旋轉的軸心
 
     float ws = 0f;
     float ad = 0f;
@@ -60,13 +60,19 @@ public class Player : MonoBehaviour
     #region 事件
     private void Start()
     {
-        //鎖定滑鼠
-        Cursor.lockState = CursorLockMode.Locked;
+        //有無遊戲資料的判定
+        if (SaveManager.instance.continueGame == true)
+        {
+            this.transform.position = SaveManager.instance.saveData.playerPos;                      //玩家的位置
+            水平旋轉軸.rotation = Quaternion.Euler(SaveManager.instance.saveData.playerRotateY);     //玩家的面向方向
+            SaveManager.instance.continueGame = false;                                              //已載入遊戲就取消
+        }
+        Cursor.lockState = CursorLockMode.Locked;       //鎖定滑鼠
     }
 
     private void Update()
     {
-        KyleAnimate();                      //動畫系統
+        KyleAnimate();                      //角色動畫系統
         Move();                             //移動
         Interact();                         //互動
     }
@@ -103,7 +109,7 @@ public class Player : MonoBehaviour
         move.y = rb.velocity.y;
         move.z = ws * Mathf.Lerp(moveSpeed, runSpeed, speed);                           //在走路與跑步速度間使用漸進值
 
-        //跑步
+        //按住shift跑步
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = Mathf.Lerp(speed, 1f, Time.deltaTime * 10f);
@@ -124,9 +130,9 @@ public class Player : MonoBehaviour
         }
 
         //視角
-        mouseX = Input.GetAxis("Mouse X") * mouseSpeed;
-        mouseY = Input.GetAxis("Mouse Y") * mouseSpeed;
-        mouseYTotal += mouseY * -1f;
+        mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.timeScale;                //使頭部能受到遊戲速度控制
+        mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.timeScale;
+        mouseYTotal += mouseY * -1f;                                                    //滑鼠垂直移動量疊加
         mouseYTotal = Mathf.Clamp(mouseYTotal, -80f, 80f);
         Quaternion rotateY = Quaternion.Euler(mouseYTotal, 0f, 0f);
         //水平軸旋轉水平旋轉軸
@@ -140,7 +146,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void JumpDetect()
     {
-        onGround = Physics.Raycast(this.transform.position, Vector3.down, 0.9f);
+        onGround = Physics.Raycast(this.transform.position, Vector3.down, 0.95f);        //從玩家中心向下發射雷射偵測地板
     }
 
     /// <summary>
