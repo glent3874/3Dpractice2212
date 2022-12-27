@@ -28,7 +28,7 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void NewGame()
     {
-        Invoke("DelayLoadNewGameScene1", 1);                    //延遲一秒載入
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class SceneController : MonoBehaviour
     {
         if (SaveManager.instance.dataExist == false) return;    //存檔不存在就無法使用
         SaveManager.instance.continueGame = true;               //需要載入存檔
-        Invoke("DelayLoadContinueGameScene", 1);                //延遲一秒載入
+        SceneManager.LoadScene(SaveManager.instance.saveData.levelName);            //載入存檔中所在關卡
     }
 
     /// <summary>
