@@ -10,7 +10,10 @@ public abstract class Windows<T> : SingletonMonoBehaviour<T> where T : class
     [HideInInspector] public float openSpeed = 10f;
     private void Reset()
     {
-        canvasGroup = this.gameObject.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
     protected override void Awake()
     {

@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] IKControll ikControl = null;               //IK控制
     [SerializeField] Animator kyleAnimator = null;              //角色動畫控制器
     [SerializeField] public Transform 水平旋轉軸 = null;                //角色水平旋轉的軸心
+    [SerializeField] public Transform eyes = null;
 
     float ws = 0f;
     float ad = 0f;

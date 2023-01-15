@@ -23,6 +23,7 @@ public class 對話系統 : MonoBehaviour
     [SerializeField] Text 人名 = null;                    //講者
     [SerializeField] Transform 繼續提示 = null;           //繼續提示
     [SerializeField] float 距離多遠時會取消對話 = 5f;      //取消對話最大距離
+    [SerializeField] public System.Action 對話結束要委派的事情 = null;
 
     Vector3 當前的位置 = Vector3.zero;
     float 距離;
@@ -118,6 +119,11 @@ public class 對話系統 : MonoBehaviour
         }
         動畫.SetBool("啟動", false);
         isPlay = false;
+
+        if(對話結束要委派的事情 != null)
+        {
+            對話結束要委派的事情.Invoke();
+        }
     }
 
     /// <summary>
