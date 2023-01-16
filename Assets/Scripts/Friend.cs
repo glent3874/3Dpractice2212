@@ -20,27 +20,27 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     bool 是否在講話 = false;
     #endregion
 
-    #region Sign
+    #region 登記狀態 初始化    
     private void Awake()
     {
         AddStatus(FriendBehaviour.Idle, StartIdle, Idleing, EndIdle);
         AddStatus(FriendBehaviour.Walk, StartWalk, Walking, EndWalk);
         AddStatus(FriendBehaviour.Talk, StartTalk, Talking, EndTalking);
-        allAIPoint = GameObject.FindGameObjectsWithTag("AIPoint");
+        allAIPoint = GameObject.FindGameObjectsWithTag("AIPoint");          //獲取所有目標點
         導航器.updatePosition = false;
         導航器.updateRotation = false;
         導航器.updateUpAxis = false;
     }
     #endregion
 
-    #region Idle
+    #region 閒置
     void StartIdle()
     {
-        idleTime = Random.Range(0.5f, 3f);
+        idleTime = Random.Range(0.5f, 3f);      //隨機發呆時間
     }
     void Idleing()
     {
-        if (statusTime > idleTime)
+        if (statusTime > idleTime)              //statusTime 宣告於底層中 指狀態的持續時間
         {
             status = FriendBehaviour.Walk;
         }
@@ -51,11 +51,11 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }
     #endregion
 
-    #region Walk
+    #region 走路
     void StartWalk()
     {
         walkTime = Random.Range(10f, 20f);
-        walkTarget = allAIPoint[Random.Range(0, allAIPoint.Length)].transform.position;
+        walkTarget = allAIPoint[Random.Range(0, allAIPoint.Length)].transform.position;     //隨機選擇一個目標點
         friendAnimator.SetBool("Walk", true);
     }
     void Walking()
@@ -73,7 +73,7 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }
     #endregion
 
-    #region Talk
+    #region 對話
     void StartTalk()
     {
         要不要看 = 1f;
@@ -109,14 +109,14 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }
     #endregion
 
-    #region Support
+    #region 支援
     void LookAt(Vector3 position, float speed = 10f)
     {
-        position.y = this.transform.position.y;
-        Quaternion ARotation = this.transform.rotation;
-        Quaternion BRotation = Quaternion.LookRotation(position - this.transform.position, new Vector3(0f, 1f, 0));
-        Quaternion result = Quaternion.Lerp(ARotation, BRotation, Time.deltaTime * speed);
-        this.transform.rotation = result;
+        position.y = this.transform.position.y;                                                                         //將目標位置的高度設為跟自己一樣
+        Quaternion ARotation = this.transform.rotation;                                                                 //自己現在的方向
+        Quaternion BRotation = Quaternion.LookRotation(position - this.transform.position, new Vector3(0f, 1f, 0));     //目標方向
+        Quaternion result = Quaternion.Lerp(ARotation, BRotation, Time.deltaTime * speed);                              //逐漸旋轉
+        this.transform.rotation = result;                                                                               //結果
     }
     bool Nearby(Vector3 position, float 臨界值 = 0.2f)
     {
@@ -129,7 +129,7 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
         導航器.SetDestination(position);
         return 導航器.steeringTarget;
     }
-    float PlayerDistance()
+    float PlayerDistance()  
     {
         return Vector3.Distance(this.transform.position, Player.instance.transform.position);
     }
@@ -140,12 +140,12 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }
     #endregion
 
-    #region Else
+    #region 其他
     protected override void Update()
     {
         base.Update();
         導航器.nextPosition = this.transform.position;
-    }
+    }   
     public void interact()
     {
         status = FriendBehaviour.Talk;
