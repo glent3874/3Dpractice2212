@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Friend Talk
   m_EditorClassIdentifier: 
   "\u5C0D\u8A71\u5217\u8868":
-  - "\u8B1B\u8005": Friend
-    "\u5167\u5BB9": Hello my friend.
+  - "\u8B1B\u8005": ???
+    "\u5167\u5BB9": "\u7B2C\u4E00\u6B21\u4F86\u55CE?"
+  - "\u8B1B\u8005": ???
+    "\u5167\u5BB9": "\u96A8\u4FBF\u770B\u770B\u5427"

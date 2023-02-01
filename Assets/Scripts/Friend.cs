@@ -18,6 +18,7 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     float idleTime = 0f;
     float walkTime = 0f;
     bool 琌量杠 = false;
+    int が笆Ω计 = 0;
     #endregion
 
     #region 祅癘篈 ﹍て    
@@ -148,7 +149,11 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }   
     public void interact()
     {
-        status = FriendBehaviour.Talk;
+        if(が笆Ω计 == 0)
+        {
+            status = FriendBehaviour.Talk;
+            が笆Ω计++;
+        }
     }
     #endregion
 }

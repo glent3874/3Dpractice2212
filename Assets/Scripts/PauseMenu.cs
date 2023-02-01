@@ -13,7 +13,7 @@ public class PauseMenu : Windows<PauseMenu>
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape)) 
         {
             if(isOpen == false)
             {
