@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void JumpDetect()
     {
-        onGround = Physics.Raycast(this.transform.position, Vector3.down, 0.95f);        //從玩家中心向下發射雷射偵測地板
+        onGround = Physics.Raycast(this.transform.position, Vector3.down, 1.2f);        //從玩家中心向下發射雷射偵測地板
     }
 
     /// <summary>

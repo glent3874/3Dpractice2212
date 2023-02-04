@@ -31,7 +31,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\u7DA0\u9580"
+  m_Name: "\u7DA0\u5BB6\u9580"
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: "\u958B\u9580"
