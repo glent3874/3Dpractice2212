@@ -9,8 +9,10 @@ using UnityEngine;
 public class Controller : MonoBehaviour, Item
 {
     #region 欄位
-    [SerializeField] Animator door;                 //開門動畫
+    [SerializeField] Animator door = null;                 //開門動畫
     [SerializeField] NpcData 描述文本 = null;       //描述文本
+    [SerializeField] Animator 燈台 = null;
+    [SerializeField] GameObject 燈台光 = null;
 
     int 互動次數 = 0;
     #endregion
@@ -30,6 +32,8 @@ public class Controller : MonoBehaviour, Item
         if (互動次數 == 1)
         { 
             door.SetBool("開門", true);
+            燈台.SetBool("收掉", true);
+            燈台光.SetActive(false);
             Destroy(this.gameObject);
         }
         互動次數++;
