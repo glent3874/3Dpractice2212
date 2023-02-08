@@ -23,7 +23,7 @@ public class Shoot : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        if(Physics.Raycast(ray,out hitInfo, 100f))
+        if (Physics.Raycast(ray, out hitInfo, 100f)) 
         {
             Instantiate(decalPrefab, hitInfo.point, Quaternion.FromToRotation(new Vector3(0, 0, 1), hitInfo.normal));
         }
