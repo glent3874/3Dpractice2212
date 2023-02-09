@@ -147,7 +147,7 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
         base.Update();
         導航器.nextPosition = this.transform.position;
     }   
-    public void interact()
+    public void Interact()
     {
         if(互動次數 == 0)
         {

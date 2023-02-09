@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface Item
 {
-    void interact();
+    void Interact();
 }

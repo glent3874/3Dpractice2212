@@ -20,7 +20,7 @@ public class LightTable : MonoBehaviour, Item
     /// <summary>
     /// 互動
     /// </summary>
-    public void interact()
+    public void Interact()
     {
         //第一次互動描述
         //第二次以後放置&拿起光球

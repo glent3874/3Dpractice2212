@@ -6,6 +6,8 @@ public class Shoot : MonoBehaviour
 {
     #region Äæ¦ì
     [SerializeField] GameObject decalPrefab = null;
+
+    public bool havePistol = false;
     #endregion
 
     #region ¨Æ¥ó
@@ -13,7 +15,8 @@ public class Shoot : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            Fire();
+            if(havePistol)
+                Fire();
         }
     }
     #endregion

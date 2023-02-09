@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && aimSomething && !對話系統.instance.isPlay)
         {
-            aimedThing.collider.transform.root.GetComponent<Item>().interact();
+            aimedThing.collider.transform.root.GetComponent<Item>().Interact();
         }
     }
 

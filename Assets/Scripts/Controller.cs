@@ -14,14 +14,14 @@ public class Controller : MonoBehaviour, Item
     [SerializeField] Animator 燈台 = null;
     [SerializeField] GameObject 燈台光 = null;
 
-    int 互動次數 = 0;
+    public int 互動次數 = 0;
     #endregion
 
     #region 方法
     /// <summary>
     /// 互動
     /// </summary>
-    public void interact()
+    public virtual void Interact()
     {
         //第一次互動描述物件
         //第二次開門並移除
