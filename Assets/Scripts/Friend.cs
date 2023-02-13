@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
+public class Friend : AYEStatusBehaviour<FriendBehaviour>, Interactable
 {
     #region 欄位
     [SerializeField] Animator friendAnimator = null;
     [SerializeField] NavMeshAgent 導航器 = null;
     [SerializeField] float talkDistance = 1f;
     [SerializeField] NpcData 第一次對話 = null;
+    [SerializeField] NpcData 第二次對話 = null;
+    [SerializeField] NpcData 第三次對話 = null;
 
     GameObject[] allAIPoint = new GameObject[0];
     Vector3 walkTarget;
@@ -95,16 +97,32 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
             {
                 是否在講話 = true;
                 對話系統.instance.對話結束要委派的事情 += 講完話了;
-                對話系統.instance.開始對話(第一次對話);
+
+                if(互動次數 == 0)
+                {
+                    對話系統.instance.開始對話(第一次對話);
+                }
+                else if (互動次數 == 1)
+                {
+                    對話系統.instance.開始對話(第二次對話);
+                }
+                else if (互動次數 == 2)
+                {
+                    對話系統.instance.開始對話(第三次對話);
+                }
+                互動次數++;
+                
             }
         }
     }
     void EndTalking()
     {
+        是否在講話 = false;
         要不要看 = 0f;
     }
     void 講完話了()
     {
+        是否在講話 = false;
         對話系統.instance.對話結束要委派的事情 -= 講完話了;
         status = FriendBehaviour.Walk;
     }
@@ -149,18 +167,17 @@ public class Friend : AYEStatusBehaviour<FriendBehaviour>, Item
     }   
     public void Interact()
     {
-        if(互動次數 == 0)
-        {
+        if(互動次數 <3)
             status = FriendBehaviour.Talk;
-            互動次數++;
-        }
     }
     #endregion
 }
 
+#region 狀態
 public enum FriendBehaviour
 {
     Idle = 0, 
     Walk = 1,
     Talk = 2,
 }
+#endregion

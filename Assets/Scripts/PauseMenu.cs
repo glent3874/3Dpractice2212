@@ -13,7 +13,7 @@ public class PauseMenu : Windows<PauseMenu>
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if(isOpen == false)
             {
@@ -24,7 +24,7 @@ public class PauseMenu : Windows<PauseMenu>
                 Close();
             }
         }
-        Time.timeScale = 1f - alpha;                        //遊戲速度隨透明度漸慢至停止
+        Time.timeScale = 1f - Mathf.Clamp01(Inventary.ins.alpha * 0.9f + PauseMenu.ins.alpha);                        //遊戲速度隨透明度漸慢至停止
     }
     #endregion
 

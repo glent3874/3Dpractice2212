@@ -6,7 +6,7 @@ using UnityEngine;
 /// 可互動
 /// 開門的遙控器
 /// </summary>
-public class Controller : MonoBehaviour, Item
+public class Controller : MonoBehaviour, Interactable
 {
     #region 欄位
     [SerializeField] Animator door = null;                 //開門動畫

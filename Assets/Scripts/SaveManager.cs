@@ -48,6 +48,7 @@ public class SaveManager
             //分配記憶體給存檔資料
             saveData = new PlayerData();
             dataExist = false;
+            saveData.stuffs = new List<Stuff>();
         }
     }
 
@@ -72,5 +73,6 @@ public struct PlayerData
     public string levelName;
     public Vector3 playerPos;
     public Vector3 playerRotateY;
+    public List<Stuff> stuffs;
 }
 #endregion

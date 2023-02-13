@@ -108,7 +108,7 @@ public class 對話系統 : MonoBehaviour
                 要講的話 = 要講的話 + 新的字;
 
                 內文.text = 要講的話;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.06f);
             }
             //對話跑完停下來
             stop = true;
