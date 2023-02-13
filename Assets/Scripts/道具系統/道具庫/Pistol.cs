@@ -13,6 +13,8 @@ public class Pistol : Controller
         if (¤¬°Ê¦¸¼Æ > 1)
         {
             mainCam.GetComponent<Shoot>().havePistol = true;
+
+            PlayerInfoManager.instance.AddItem(1);
         }
     }
 }

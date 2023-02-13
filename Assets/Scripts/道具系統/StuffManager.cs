@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StuffManager
 {
+    #region 單例模式
     public static StuffManager instance
     {
         get
@@ -16,9 +17,9 @@ public class StuffManager
         }
     }
     static StuffManager _instance = null;
+    #endregion
 
     StuffData[] 所有的道具文本 = new StuffData[0];
-
 
     bool isLoad = false;
     public void Load()
