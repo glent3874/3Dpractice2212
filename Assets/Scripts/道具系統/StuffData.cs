@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 建立道具檔案
+/// </summary>
 [CreateAssetMenu(fileName ="New Item", menuName ="Create New Item")]
 public class StuffData : ScriptableObject
 {

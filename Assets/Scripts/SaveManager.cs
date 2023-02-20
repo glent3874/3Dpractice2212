@@ -34,8 +34,9 @@ public class SaveManager
     /// </summary>
     public void Download()
     {
-        //從硬碟讀取文件
+        //從硬碟讀取文件 如果沒有資料就回傳"N"
         string json = PlayerPrefs.GetString("PLAYER_DATA", "N");
+
         //如果有資料就解析
         if (json != "N") 
         {
@@ -45,6 +46,7 @@ public class SaveManager
         }
         else
         {
+            //沒資料
             //分配記憶體給存檔資料
             saveData = new PlayerData();
             dataExist = false;
@@ -60,7 +62,7 @@ public class SaveManager
         //把玩家資料轉成json文字
         string json = JsonUtility.ToJson(saveData, true);
         Debug.Log(json);
-        //把文件丟到硬碟中
+        //把文件丟到硬碟中 命名為PLAYER_DATA
         PlayerPrefs.SetString("PLAYER_DATA", json);
     }
     #endregion
@@ -70,9 +72,9 @@ public class SaveManager
 [System.Serializable]
 public struct PlayerData
 {
-    public string levelName;
-    public Vector3 playerPos;
-    public Vector3 playerRotateY;
-    public List<Stuff> stuffs;
+    public string levelName;            //當前關卡
+    public Vector3 playerPos;           //玩家位置
+    public Vector3 playerRotateY;       //玩家面向
+    public List<Stuff> stuffs;          //玩家身上的道具資料
 }
 #endregion

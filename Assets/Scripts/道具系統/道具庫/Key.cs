@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 鑰匙
+/// </summary>
 public class Key : MonoBehaviour, Interactable
 {
+    #region 欄位
     [SerializeField] NpcData 文本 = null;
 
     int 互動次數 = 0;
+    #endregion
 
+    #region 方法
+    /// <summary>
+    /// 互動
+    /// </summary>
     public void Interact()
     {
         if(互動次數 == 0)
@@ -22,4 +31,5 @@ public class Key : MonoBehaviour, Interactable
         }
         互動次數++;
     }
+    #endregion
 }

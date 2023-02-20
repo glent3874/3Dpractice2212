@@ -192,6 +192,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ²¾°Ê°Êµe
+    /// </summary>
     private void KyleAnimate()
     {
         kyleAnimator.SetFloat("WS", ws);
