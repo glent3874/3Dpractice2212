@@ -13,6 +13,8 @@ public class 格子 : MonoBehaviour
     [SerializeField] Text 道具數量 = null;
 
     StuffData stuffData;                                        //暫存道具資料
+    Stuff 我的資料;
+    bool 維持資料;
     #endregion
 
     /// <summary>
@@ -22,6 +24,8 @@ public class 格子 : MonoBehaviour
     public void 接收資料(Stuff theStuffPlayerOwn)
     {
         stuffData = StuffManager.instance.GetDataById(theStuffPlayerOwn.id);    //從圖書館查詢資料並取出
+
+        我的資料 = theStuffPlayerOwn;
 
         圖示.enabled = true;                                    //開啟格子上的圖示
         圖示.sprite = stuffData.道具圖片;                        //更改圖片
@@ -45,4 +49,23 @@ public class 格子 : MonoBehaviour
         道具數量.text = null;
         道具數量.enabled = false;
     }
+
+    public void 顯示資料()
+	{
+        詳細資料.ins.顯示(我的資料);
+	}
+
+    public void 維持顯示資料()
+	{
+        詳細資料.ins.維持顯示();
+	}
+
+    public void 取消顯示()
+	{
+        if (!維持資料)
+		{
+            詳細資料.ins.取消顯示();
+		}
+	}
+
 }

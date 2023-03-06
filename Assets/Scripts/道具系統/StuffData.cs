@@ -12,4 +12,8 @@ public class StuffData : ScriptableObject
     public string 道具名稱;
     public string 道具敘述;
     public Sprite 道具圖片;
+    public bool 可使用;
+    public bool 可消耗;
+    public bool 可刪除;
+    public int 堆疊上限;
 }

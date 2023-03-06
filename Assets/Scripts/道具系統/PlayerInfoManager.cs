@@ -84,8 +84,47 @@ public class PlayerInfoManager
 
     public bool 是否有(int 道具編號)
     {
+        for (int i = 0; i < SaveManager.instance.saveData.stuffs.Count; i++) 
+		{
+            if (SaveManager.instance.saveData.stuffs[i].id == 道具編號)
+			{
+                return true;
+            }
+		}
         return false;
     }
+
+    public bool GetBool(string key)
+	{
+        for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
+		{
+            if (SaveManager.instance.saveData.sceneDatas[i].key == key)
+			{
+                return SaveManager.instance.saveData.sceneDatas[i].flag;
+			}
+		}
+        return false;
+	}
+
+    public void SetBool(string key, bool v)
+	{
+        SceneData temp = new SceneData();
+        temp.key = key;
+        temp.flag = v;
+        temp.pos = Vector3.zero;
+        temp.info = "";
+
+        for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
+		{
+            if (SaveManager.instance.saveData.sceneDatas[i].key == key)
+			{
+                SaveManager.instance.saveData.sceneDatas[i] = temp;
+                return;
+			}
+		}
+
+        SaveManager.instance.saveData.sceneDatas.Add(temp);
+	}
     #endregion
 }
 

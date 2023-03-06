@@ -28,6 +28,8 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void NewGame()
     {
+        SaveManager.instance.清除資料();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
     }
 

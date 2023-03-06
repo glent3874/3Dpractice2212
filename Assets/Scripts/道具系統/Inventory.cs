@@ -20,10 +20,11 @@ public class Inventory : Windows<Inventory>
     {
         base.Start();
         StuffManager.instance.Load();                                   // 要求圖書館員讀取所有道具資料到系統中
-        UpdateUI();                                                     // 開啟道具欄先更新一次
-        PlayerInfoManager.instance.道具發生變化 += UpdateUI;             // 委派更新UI的動作到玩家道具系統, 存取或移除資料後做更新UI 的動作
 
         slots = panal.GetComponentsInChildren<格子>();                  // 取得格子
+
+        UpdateUI();                                                     // 開啟道具欄先更新一次
+        PlayerInfoManager.instance.道具發生變化 += UpdateUI;             // 委派更新UI的動作到玩家道具系統, 存取或移除資料後做更新UI 的動作
     }
 
     private void OnDisable()
