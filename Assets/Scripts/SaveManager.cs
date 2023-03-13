@@ -84,7 +84,7 @@ public struct PlayerData
 {
     public string levelName;            //當前關卡
     public Vector3 playerPos;           //玩家位置
-    public Vector3 playerRotateY;       //玩家面向
+    public Vector3 playerRotate;       //玩家面向
     public List<Stuff> stuffs;          //玩家身上的道具資料
     public List<SceneData> sceneDatas;
 }

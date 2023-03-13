@@ -62,7 +62,7 @@ public class PauseMenu : Windows<PauseMenu>
     {
         SaveManager.instance.saveData.levelName = SceneManager.GetActiveScene().name;                   //記錄此場景名字
         SaveManager.instance.saveData.playerPos = Player.instance.transform.position;                   //記錄玩家位置
-        SaveManager.instance.saveData.playerRotateY = Player.instance.水平旋轉軸.rotation.eulerAngles;    //記錄玩家轉向
+        SaveManager.instance.saveData.playerRotate = new Vector3(Player.instance.mouseYTotal, Player.instance.水平旋轉軸.localRotation.eulerAngles.y, 0f);
         SaveManager.instance.Upload();                                                                  //要求系統上傳檔案
     }
 

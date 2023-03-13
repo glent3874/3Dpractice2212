@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     float speed = 0f;
     float mouseX = 0f;
     float mouseY = 0f;
-    float mouseYTotal = 0f;
+    public float mouseYTotal = 0f;
     RaycastHit aimedThing;                                      //視線瞄準的可互動物件
     bool aimSomething;                                          //是否有瞄準到可互動物件
     RaycastHit thingInSight;                                    //視線瞄準的物件
@@ -65,7 +65,10 @@ public class Player : MonoBehaviour
         if (SaveManager.instance.continueGame == true)
         {
             this.transform.position = SaveManager.instance.saveData.playerPos;                      //玩家的位置
-            水平旋轉軸.rotation = Quaternion.Euler(SaveManager.instance.saveData.playerRotateY);     //玩家的面向方向
+
+            水平旋轉軸.localRotation = Quaternion.Euler(0f, SaveManager.instance.saveData.playerRotate.y, 0f);
+            mouseYTotal = SaveManager.instance.saveData.playerRotate.x;
+
             SaveManager.instance.continueGame = false;                                              //已載入遊戲就取消
         }
         Cursor.lockState = CursorLockMode.Locked;       //鎖定滑鼠
