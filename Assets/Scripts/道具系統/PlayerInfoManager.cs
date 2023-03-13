@@ -98,14 +98,11 @@ public class PlayerInfoManager
         return false;
     }
 
-<<<<<<< HEAD
     /// <summary>
     /// 檢查場景中的資料
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-=======
->>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
     public bool GetBool(string key)
 	{
         for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
@@ -118,14 +115,11 @@ public class PlayerInfoManager
         return false;
 	}
 
-<<<<<<< HEAD
     /// <summary>
     /// 存場景中的資料
     /// </summary>
     /// <param name="key"></param>
     /// <param name="v"></param>
-=======
->>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
     public void SetBool(string key, bool v)
 	{
         SceneData temp = new SceneData();
@@ -136,22 +130,14 @@ public class PlayerInfoManager
 
         for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
 		{
-<<<<<<< HEAD
             //如果已經有這筆資料就覆蓋過去
-=======
->>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
             if (SaveManager.instance.saveData.sceneDatas[i].key == key)
 			{
                 SaveManager.instance.saveData.sceneDatas[i] = temp;
                 return;
 			}
 		}
-
-<<<<<<< HEAD
         SaveManager.instance.saveData.sceneDatas.Add(temp);     //沒有資料就建一個
-=======
-        SaveManager.instance.saveData.sceneDatas.Add(temp);
->>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 	}
     #endregion
 }
