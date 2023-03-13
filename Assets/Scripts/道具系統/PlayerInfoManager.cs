@@ -81,11 +81,65 @@ public class PlayerInfoManager
         }
     }
     
-
+    /// <summary>
+    /// 搜尋玩家身上是否有此項道具
+    /// </summary>
+    /// <param name="道具編號"></param>
+    /// <returns></returns>
     public bool 是否有(int 道具編號)
     {
+        for (int i = 0; i < SaveManager.instance.saveData.stuffs.Count; i++) 
+		{
+            if (SaveManager.instance.saveData.stuffs[i].id == 道具編號)
+			{
+                return true;
+            }
+		}
         return false;
     }
+
+    /// <summary>
+    /// 檢查場景中的資料
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public bool GetBool(string key)
+	{
+        for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
+		{
+            if (SaveManager.instance.saveData.sceneDatas[i].key == key)
+			{
+                return SaveManager.instance.saveData.sceneDatas[i].flag;
+			}
+		}
+        return false;
+	}
+
+    /// <summary>
+    /// 存場景中的資料
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="v"></param>
+    public void SetBool(string key, bool v)
+	{
+        SceneData temp = new SceneData();
+        temp.key = key;
+        temp.flag = v;
+        temp.pos = Vector3.zero;
+        temp.info = "";
+
+        for (int i = 0; i < SaveManager.instance.saveData.sceneDatas.Count; i++)
+		{
+            //如果已經有這筆資料就覆蓋過去
+            if (SaveManager.instance.saveData.sceneDatas[i].key == key)
+			{
+                SaveManager.instance.saveData.sceneDatas[i] = temp;
+                return;
+			}
+		}
+
+        SaveManager.instance.saveData.sceneDatas.Add(temp);     //沒有資料就建一個
+	}
     #endregion
 }
 

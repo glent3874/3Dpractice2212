@@ -29,6 +29,12 @@ public class SaveManager
     #endregion
 
     #region 方法
+    public void 清除資料()
+	{
+        PlayerPrefs.DeleteKey("PLAYER_DATA");
+        Download();
+	}
+
     /// <summary>
     /// 下載檔案
     /// </summary>
@@ -49,8 +55,9 @@ public class SaveManager
             //沒資料
             //分配記憶體給存檔資料
             saveData = new PlayerData();
-            dataExist = false;
             saveData.stuffs = new List<Stuff>();
+            saveData.sceneDatas = new List<SceneData>();
+            dataExist = false;
         }
     }
 
@@ -69,6 +76,9 @@ public class SaveManager
 }
 
 #region 結構
+/// <summary>
+/// 玩家存檔資料
+/// </summary>
 [System.Serializable]
 public struct PlayerData
 {
@@ -76,5 +86,18 @@ public struct PlayerData
     public Vector3 playerPos;           //玩家位置
     public Vector3 playerRotateY;       //玩家面向
     public List<Stuff> stuffs;          //玩家身上的道具資料
+    public List<SceneData> sceneDatas;
+}
+
+/// <summary>
+/// 場景資料
+/// </summary>
+[System.Serializable]
+public struct SceneData
+{
+    public string key;
+    public bool flag;
+    public Vector3 pos;
+    public string info;
 }
 #endregion

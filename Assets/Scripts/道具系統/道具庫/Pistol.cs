@@ -9,10 +9,22 @@ public class Pistol : Controller
 {
     #region 欄位
     [SerializeField] public GameObject mainCam;
-    #endregion
+    [SerializeField] string saveKey = "1F傳送門";
+	#endregion
 
-    #region 方法
-    public override void Interact()
+	#region 事件
+	private void Start()
+	{
+        if (PlayerInfoManager.instance.GetBool(saveKey) == true)
+		{
+            mainCam.GetComponent<Shoot>().havePistol = true;
+            Destroy(this.gameObject);
+		}
+    }
+	#endregion
+
+	#region 方法
+	public override void Interact()
     {
         base.Interact();
 
@@ -21,6 +33,8 @@ public class Pistol : Controller
             mainCam.GetComponent<Shoot>().havePistol = true;
 
             PlayerInfoManager.instance.AddItem(1);
+
+            PlayerInfoManager.instance.SetBool(saveKey, true);
         }
     }
     #endregion

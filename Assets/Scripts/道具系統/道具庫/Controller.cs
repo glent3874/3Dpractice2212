@@ -15,13 +15,13 @@ public class Controller : MonoBehaviour, Interactable
     [SerializeField] GameObject 燈台光 = null;
 
     public int 互動次數 = 0;
-    #endregion
+	#endregion
 
-    #region 方法
-    /// <summary>
-    /// 互動
-    /// </summary>
-    public virtual void Interact()
+	#region 方法
+	/// <summary>
+	/// 互動
+	/// </summary>
+	public virtual void Interact()
     {
         //第一次互動描述物件
         //第二次開門並移除
@@ -34,6 +34,7 @@ public class Controller : MonoBehaviour, Interactable
             door.SetBool("開門", true);
             燈台.SetBool("收掉", true);
             燈台光.SetActive(false);
+
             Destroy(this.gameObject);
         }
         互動次數++;

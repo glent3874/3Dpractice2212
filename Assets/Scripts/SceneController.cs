@@ -17,6 +17,7 @@ public class SceneController : MonoBehaviour
     #region 事件
     private void Awake()
     {
+        Time.timeScale = 1f;
         SaveManager.instance.Download();                                                        //要求存檔系統下載檔案
         if (SaveManager.instance.dataExist == false) continueText.color = continueTextColor;    //存檔不存在就取消continue
     }
@@ -28,6 +29,13 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void NewGame()
     {
+        SaveManager.instance.清除資料();
+
+        轉場器.ins.轉場(黑幕降下來之後);
+    }
+
+    void 黑幕降下來之後()
+	{
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
     }
 
@@ -38,7 +46,7 @@ public class SceneController : MonoBehaviour
     {
         if (SaveManager.instance.dataExist == false) return;    //存檔不存在就無法使用
         SaveManager.instance.continueGame = true;               //需要載入存檔
-        SceneManager.LoadScene(SaveManager.instance.saveData.levelName);            //載入存檔中所在關卡
+        轉場器.ins.轉場(SaveManager.instance.saveData.levelName);
     }
 
     /// <summary>

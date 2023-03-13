@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     #region 欄位
     [SerializeField] Rigidbody rb = null;                       //物理系統
-    [SerializeField] Transform cameraFollow = null;             //攝影機跟隨的目標(垂直旋轉軸)
+    [SerializeField] public Transform cameraFollow = null;             //攝影機跟隨的目標(垂直旋轉軸)
     [SerializeField] Transform cameraTransform = null;          //攝影機的座標
     [SerializeField] float moveSpeed = 1.5f;                    //移動速度
     [SerializeField] float runSpeed = 5f;                       //跑步速度
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask seenableMask;                    //視線可跟隨的圖層(雷射來自攝影機)
     [SerializeField] IKControll ikControl = null;               //IK控制
     [SerializeField] Animator kyleAnimator = null;              //角色動畫控制器
-    [SerializeField] public Transform 水平旋轉軸 = null;                //角色水平旋轉的軸心
+    [SerializeField] public Transform 水平旋轉軸 = null;         //角色水平旋轉的軸心
     [SerializeField] public Transform eyes = null;
 
     float ws = 0f;
