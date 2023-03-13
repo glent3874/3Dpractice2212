@@ -14,6 +14,7 @@ public class Key : MonoBehaviour, Interactable
     int 互動次數 = 0;
 	#endregion
 
+<<<<<<< HEAD
 	#region 事件
 	private void Start()
 	{
@@ -22,6 +23,15 @@ public class Key : MonoBehaviour, Interactable
             Destroy(this.gameObject);
 	}
 	#endregion
+=======
+	private void Start()
+	{
+		if (PlayerInfoManager.instance.GetBool(saveKey) == true)
+		{
+            Destroy(this.gameObject);
+		}
+	}
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 
 	#region 方法
 	/// <summary>

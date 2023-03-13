@@ -8,6 +8,7 @@ public class Door2F: MonoBehaviour, Interactable
 	[SerializeField] NpcData 沒鑰匙的劇情 = null;
 	[SerializeField] NpcData 有鑰匙的劇情 = null;
 	[SerializeField] int 鑰匙ID = 0;
+<<<<<<< HEAD
 	[SerializeField] string saveKey = "2F門";
 
 	private void Start()
@@ -15,6 +16,8 @@ public class Door2F: MonoBehaviour, Interactable
 		if (PlayerInfoManager.instance.GetBool(saveKey) == true)
 			門的動畫.SetBool("開關", true);
 	}
+=======
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 
 	public void Interact()
 	{
@@ -22,8 +25,11 @@ public class Door2F: MonoBehaviour, Interactable
 		{
 			對話系統.instance.開始對話(有鑰匙的劇情);
 			門的動畫.SetBool("開門", true);
+<<<<<<< HEAD
 
 			PlayerInfoManager.instance.SetBool(saveKey, true);
+=======
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 		}
 		else
 		{

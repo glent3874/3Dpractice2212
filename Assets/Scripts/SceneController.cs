@@ -31,11 +31,14 @@ public class SceneController : MonoBehaviour
     {
         SaveManager.instance.清除資料();
 
+<<<<<<< HEAD
         轉場器.ins.轉場(黑幕降下來之後);
     }
 
     void 黑幕降下來之後()
 	{
+=======
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
     }
 

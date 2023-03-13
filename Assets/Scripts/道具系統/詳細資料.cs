@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+<<<<<<< HEAD
 /// <summary>
 /// 物品欄裡道具詳細資料的顯示
 /// </summary>
@@ -10,12 +11,18 @@ public class 詳細資料 : Windows<詳細資料>
 {
 	#region 欄位
 	[SerializeField] Image 圖示 = null;
+=======
+public class 詳細資料 : Windows<詳細資料>
+{
+    [SerializeField] Image 圖示 = null;
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
     [SerializeField] Text 道具名稱 = null;
     [SerializeField] Text 道具敘述 = null;
     [SerializeField] CanvasGroup 使用按鈕透明度 = null;
     [SerializeField] CanvasGroup 刪除按鈕透明度 = null;
 
     bool 是否維持顯示 = false;
+<<<<<<< HEAD
 	#endregion
 
 	#region 事件
@@ -41,6 +48,12 @@ public class 詳細資料 : Windows<詳細資料>
 	public void 顯示(Stuff 道具資料)
     {
         StuffData 詳細資料 = StuffManager.instance.GetDataById(道具資料.id);        //向資料庫輸入道具ID搜尋詳細資料
+=======
+
+    public void 顯示(Stuff 道具資料)
+    {
+        StuffData 詳細資料 = StuffManager.instance.GetDataById(道具資料.id);
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
         圖示.sprite = 詳細資料.道具圖片;
         道具名稱.text = 詳細資料.道具名稱 +  "\r\n剩餘: "  + 道具資料.count;
         道具敘述.text = 詳細資料.道具敘述;
@@ -61,5 +74,21 @@ public class 詳細資料 : Windows<詳細資料>
             Close();
         }
 	}
+<<<<<<< HEAD
 	#endregion
+=======
+
+	protected override void Update()
+	{
+		base.Update();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (isOpen)
+			{
+                是否維持顯示 = false;
+                Close();
+			}
+        }
+	}
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 }

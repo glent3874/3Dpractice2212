@@ -57,7 +57,10 @@ public class SaveManager
             saveData = new PlayerData();
             saveData.stuffs = new List<Stuff>();
             saveData.sceneDatas = new List<SceneData>();
+<<<<<<< HEAD
             dataExist = false;
+=======
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
         }
     }
 
@@ -89,9 +92,12 @@ public struct PlayerData
     public List<SceneData> sceneDatas;
 }
 
+<<<<<<< HEAD
 /// <summary>
 /// ³õ´º¸ê®Æ
 /// </summary>
+=======
+>>>>>>> c710b460939240fae837926da5c6d09db74b3b2c
 [System.Serializable]
 public struct SceneData
 {
