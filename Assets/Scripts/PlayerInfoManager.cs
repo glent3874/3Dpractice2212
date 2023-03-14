@@ -99,9 +99,9 @@ public class PlayerInfoManager
     }
 
     /// <summary>
-    /// 檢查場景中的資料
+    /// 檢查場景資料
     /// </summary>
-    /// <param name="key"></param>
+    /// <param name="key">要查的資料名</param>
     /// <returns></returns>
     public bool GetBool(string key)
 	{
@@ -116,12 +116,13 @@ public class PlayerInfoManager
 	}
 
     /// <summary>
-    /// 存場景中的資料
+    /// 設定場景資料
     /// </summary>
     /// <param name="key"></param>
     /// <param name="v"></param>
     public void SetBool(string key, bool v)
 	{
+        //建暫存
         SceneData temp = new SceneData();
         temp.key = key;
         temp.flag = v;
@@ -143,6 +144,9 @@ public class PlayerInfoManager
 }
 
 #region 結構
+/// <summary>
+/// 只記錄道具ID與數量
+/// </summary>
 [System.Serializable]
 public struct Stuff
 {

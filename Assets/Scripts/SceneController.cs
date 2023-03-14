@@ -34,6 +34,9 @@ public class SceneController : MonoBehaviour
         轉場器.ins.轉場(黑幕降下來之後);
     }
 
+    /// <summary>
+    /// 委派的事件
+    /// </summary>
     void 黑幕降下來之後()
 	{
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
@@ -63,22 +66,6 @@ public class SceneController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-    }
-    
-    /// <summary>
-    /// 載入場景:New
-    /// </summary>
-    private void DelayLoadNewGameScene1()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       //載入menu後第一個場景
-    }
-
-    /// <summary>
-    /// 載入場景:Continue
-    /// </summary>
-    private void DelayLoadContinueGameScene()
-    {
-        SceneManager.LoadScene(SaveManager.instance.saveData.levelName);            //載入存檔中所在關卡
     }
     #endregion
 }

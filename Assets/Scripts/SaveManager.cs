@@ -86,7 +86,7 @@ public struct PlayerData
     public Vector3 playerPos;           //玩家位置
     public Vector3 playerRotate;       //玩家面向
     public List<Stuff> stuffs;          //玩家身上的道具資料
-    public List<SceneData> sceneDatas;
+    public List<SceneData> sceneDatas;  //場景資料
 }
 
 /// <summary>
@@ -95,8 +95,8 @@ public struct PlayerData
 [System.Serializable]
 public struct SceneData
 {
-    public string key;
-    public bool flag;
+    public string key;                  //資料名稱
+    public bool flag;                   //用於回傳是不是有這筆資料了
     public Vector3 pos;
     public string info;
 }
