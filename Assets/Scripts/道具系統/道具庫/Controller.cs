@@ -13,15 +13,30 @@ public class Controller : MonoBehaviour, Interactable
     [SerializeField] NpcData 描述文本 = null;       //描述文本
     [SerializeField] Animator 燈台 = null;
     [SerializeField] GameObject 燈台光 = null;
+    [SerializeField] string saveKey = "";
+    [SerializeField] GameObject theDoor = null;
 
     public int 互動次數 = 0;
-	#endregion
+    #endregion
 
-	#region 方法
-	/// <summary>
-	/// 互動
-	/// </summary>
-	public virtual void Interact()
+    #region 事件
+    private void Start()
+    {
+        if (PlayerInfoManager.instance.GetBool(saveKey) == true)
+        {
+            燈台.SetBool("收掉", true);
+            燈台光.SetActive(false);
+            Destroy(theDoor);
+            Destroy(this.gameObject);
+        }
+    }
+    #endregion
+
+    #region 方法
+    /// <summary>
+    /// 互動
+    /// </summary>
+    public virtual void Interact()
     {
         //第一次互動描述物件
         //第二次開門並移除
@@ -34,6 +49,8 @@ public class Controller : MonoBehaviour, Interactable
             door.SetBool("開門", true);
             燈台.SetBool("收掉", true);
             燈台光.SetActive(false);
+
+            PlayerInfoManager.instance.SetBool(saveKey, true);
 
             Destroy(this.gameObject);
         }

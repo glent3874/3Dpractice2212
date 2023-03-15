@@ -6,11 +6,20 @@ public class Shoot : MonoBehaviour
 {
     #region Äæ¦ì
     [SerializeField] GameObject decalPrefab = null;
+    [SerializeField] public string saveKey = "";
 
     public bool havePistol = false;
     #endregion
 
     #region ¨Æ¥ó
+    private void Start()
+    {
+        if (PlayerInfoManager.instance.GetBool(saveKey) == true)
+        {
+            havePistol = true;
+        }
+    }
+
     private void Update()
     {
         if(Input.GetButtonDown("Fire1"))
