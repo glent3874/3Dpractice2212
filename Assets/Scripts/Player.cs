@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] Animator kyleAnimator = null;              //角色動畫控制器
     [SerializeField] public Transform 水平旋轉軸 = null;         //角色水平旋轉的軸心
     [SerializeField] public Transform eyes = null;
+    [SerializeField] Collider 眼睛的碰撞器 = null;
 
     float ws = 0f;
     float ad = 0f;
@@ -108,6 +109,14 @@ public class Player : MonoBehaviour
         //移動
         ws = Mathf.Lerp(ws, Input.GetAxisRaw("Vertical"), Time.deltaTime * 10f);        //取得垂直(WS)輸入值
         ad = Mathf.Lerp(ad, Input.GetAxisRaw("Horizontal"), Time.deltaTime * 10f);      //取得水平(AD)輸入值
+
+        AnimatorStateInfo 當前的動畫 = kyleAnimator.GetCurrentAnimatorStateInfo(0);
+        if (當前的動畫.IsTag("躺平派"))
+		{
+            ws = 0f;
+            ad = 0f;
+		}
+
         Vector3 move;
         move.x = ad * Mathf.Lerp(moveSpeed, runSpeed, speed);                           //在走路與跑步速度間使用漸進值
         move.y = rb.velocity.y;
@@ -136,6 +145,13 @@ public class Player : MonoBehaviour
         //視角
         mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.timeScale;                //使頭部能受到遊戲速度控制
         mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.timeScale;
+
+        if (當前的動畫.IsTag("躺平派"))
+		{
+            mouseX = 0f;
+            mouseY = 0f;
+		}
+
         mouseYTotal += mouseY * -1f;                                                    //滑鼠垂直移動量疊加
         mouseYTotal = Mathf.Clamp(mouseYTotal, -80f, 80f);
         Quaternion rotateY = Quaternion.Euler(mouseYTotal, 0f, 0f);
@@ -203,6 +219,40 @@ public class Player : MonoBehaviour
         kyleAnimator.SetFloat("WS", ws);
         kyleAnimator.SetFloat("AD", ad);
         kyleAnimator.SetFloat("SPEED", speed);
+
+        if (Input.anyKeyDown && 躺 == true)
+		{
+            躺 = false;
+		}
     }
-    #endregion
+
+    public void Hit(傷害包 傷害)
+	{
+        躺 = true;
+	}
+
+    public void Die(傷害包 傷害)
+	{
+        躺 = true;
+	}
+
+    bool 躺
+	{
+        get { return _躺; }
+        set
+		{
+            _躺 = value;
+            kyleAnimator.SetBool("躺", value);
+            if (value == true)
+			{
+                眼睛的碰撞器.enabled = false;
+			}
+            else
+			{
+                眼睛的碰撞器.enabled = true;
+			}
+		}
+	}
+    bool _躺 = false;
+	#endregion
 }
